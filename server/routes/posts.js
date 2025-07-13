@@ -1,20 +1,16 @@
 const express = require('express');
 const router = express.Router();
 const postController = require('../controllers/postController');
+const { protect } = require('../middleware/auth');
 
-// GET all posts
+// Public routes
 router.get('/', postController.getAllPosts);
-
-// POST create a new post
-router.post('/', postController.createPost);
-
-// GET a single post by ID
 router.get('/:id', postController.getPostById);
 
-// PUT update a post by ID
-router.put('/:id', postController.updatePost);
-
-// DELETE a post by ID
-router.delete('/:id', postController.deletePost);
+// Protected routes
+router.post('/', protect, postController.createPost);
+router.put('/:id', protect, postController.updatePost);
+router.delete('/:id', protect, postController.deletePost);
+router.post('/:id/comments', protect, postController.addComment);
 
 module.exports = router; 

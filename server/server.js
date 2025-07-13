@@ -1,4 +1,5 @@
 // server.js - Main server file for the MERN blog application
+require('dotenv').config();
 
 // Import required modules
 const express = require('express');
